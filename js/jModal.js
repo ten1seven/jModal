@@ -1,6 +1,6 @@
 /*
 	jModal.js (a simple image and video modal)
-	version 0.1
+	version 0.2
 	(c) 2012 Jeremy Fields [jeremy.fields@viget.com]
 	released under the MIT license
 */
@@ -10,6 +10,12 @@
 	
 	win.jModal = function(breakpoints) {
 		
+		// global variables
+		var $jmodal = '';
+		var $jmodalContent = '';
+		var $selected = '';
+		var $busyloader = '';
+		
 		var init = function() {
 			
 			$('.jmodal').click(function(e) {
@@ -17,6 +23,7 @@
 				
 				var $this = $(this);
 				
+				showBusyLoader($('body'));
 				($this.data('type') === 'image') ? loadImage($this,loadModal) : loadVideo($this,loadModal);
 			});
 			
@@ -46,7 +53,7 @@
 		};
 		
 		
-		/* video
+		/* youtube video
 		========================================================================== */
 		var loadVideo = function(elm,callback) {
 			var $this = elm;
@@ -76,14 +83,14 @@
 		========================================================================== */
 		var loadModal = function(elm,link) {
 			
-			// add modal markup to dom
-			var $jmodal = $('<div id="jmodal-modal"><div class="jmodal-content"></div><a href="#" class="jmodal-close">X</a></div>').appendTo('body');
-			BlockUI();
+			$jmodal = $('<div id="jmodal-modal"><div class="jmodal-content"></div><a href="#" class="jmodal-close">X</a></div>').appendTo('body');
+			$jmodalContent = $jmodal.find('.jmodal-content');
 			
+			hideBusyLoader();
+			BlockUI();
 			addGalleryLinks(link);
 			
 			// append element to modal
-			var $jmodalContent = $jmodal.find('.jmodal-content');
 			$jmodalContent.append(elm);
 			
 			// measure container
@@ -105,9 +112,9 @@
 				})
 				
 				// animate in to vertical center
-				.delay(300).animate({
+				.delay(400).animate({
 					'top': (((height - $(window).height())/2) * -1)
-				},200,function() {
+				},300,function() {
 					
 					closeModal($jmodal);
 					
@@ -135,7 +142,7 @@
 					// animate
 					.animate({
 						'top': ((height * -1) - 20)
-					},200,function() {
+					},300,function() {
 						$jmodal.remove();
 						unBlockUI();
 					});
@@ -158,58 +165,54 @@
 					
 					i++;
 				});
-				$('#jmodal-modal').addClass('jmodal-modal-gallery').append('<p class="jmodal-gallery-links"><a href="#" class="jmodal-gallery-prev">Prev</a>' + galleryContent + '<a href="#" class="jmodal-gallery-next">Next</a></p>');
+				$jmodal.addClass('jmodal-modal-gallery').append('<p class="jmodal-gallery-links"><a href="#" class="jmodal-gallery-prev">Prev</a>' + galleryContent + '<a href="#" class="jmodal-gallery-next">Next</a></p>');
 				
+				$selected = $jmodal.find('.selected');
 				bindGalleryLinks();
 			}
 		};
+		
 		var bindGalleryLinks = function() {
 			$('.jmodal-gallery-link').click(function(e) {
 				e.preventDefault();
 				
 				var $this = $(this);
 				if (!$this.hasClass('selected')) {
-					$('.jmodal-content img').animate({
-						'opacity': 0
-					},100);
-					loadImage($this,dispGalleryImg);
+					advanceGallery($this);
 				}
 			});
 			
 			$('.jmodal-gallery-prev').click(function(e) {
 				e.preventDefault();
 				
-				var $selected = $('.jmodal-gallery-links .selected');
 				var $prev = $selected.prev().not(this);
-				
 				if ($prev.length !== 0) {
-					$('.jmodal-content img').animate({
-						'opacity': 0
-					},100);
-					loadImage($prev,dispGalleryImg);
+					advanceGallery($prev);
 				}
 			});
 			
 			$('.jmodal-gallery-next').click(function(e) {
 				e.preventDefault();
 				
-				var $selected = $('.jmodal-gallery-links .selected');
 				var $next = $selected.next().not(this);
-				
 				if ($next.length !== 0) {
-					$('.jmodal-content img').animate({
-						'opacity': 0
-					},100);
-					loadImage($next,dispGalleryImg);
+					advanceGallery($next);
 				}
 			});
 		};
+		
+		var advanceGallery = function(elm) {
+			$jmodalContent.find('img').animate({
+				'opacity': 0
+			},100);
+			loadImage(elm,dispGalleryImg);
+		};
+		
 		var dispGalleryImg = function(img,link) {
-			var $jmodal = $('#jmodal-modal');
-			var $jmodalContent = $jmodal.find('.jmodal-content').empty();
+			$jmodalContent.empty();
 			
-			$('.jmodal-gallery-link.selected').removeClass('selected');
-			$(link).addClass('selected');
+			$selected.removeClass('selected');
+			$selected = $(link).addClass('selected');
 			
 			var $img = $(img);
 			$img.appendTo($jmodalContent).css({
@@ -256,6 +259,7 @@
 				}
 			}
 		};
+		
 		var unBlockUI = function() {
 			$('#UIBlock').fadeOut(100,function() {
 				$(this).remove();
@@ -263,9 +267,10 @@
 		};
 		
 		
-		/*
+		/* busy loader
+		========================================================================== */
 		var showBusyLoader = function(elm) {
-			$('<div id="carousel-busyloader"></div>').appendTo(elm).css({
+			$busyloader = $('<div id="carousel-busyloader"></div>').appendTo(elm).css({
 				'opacity': 0,
 				'margin-top': -50
 			}).animate({
@@ -274,20 +279,18 @@
 			},300);
 		};
 		
-		var hideBusyLoader = function(callback) {
-			var $busyloader = $('#carousel-busyloader');
-		
+		var hideBusyLoader = function() {
 			$busyloader.animate({
 				'opacity': 0,
 				'margin-top': -50
-			},300,function() {
+			},200,function() {
 				$busyloader.remove();
-		
-				callback();
 			});
 		};
-		*/
 		
+		
+		/* init
+		========================================================================== */
 		init();
 		
 	};

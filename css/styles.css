@@ -80,6 +80,6 @@ body {
 	position: absolute;
 	top: 50%;
 	width: 60px;
-	z-index: 100;
+	z-index: 999;
 }
 /* @end */
