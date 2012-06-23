@@ -48,8 +48,15 @@ body {
 	color: #999;
 	display: inline-block;
 	font-size: 13px;
+	outline: none;
 	padding: 0 10px;
 	text-decoration: underline;
+}
+.jmodal-gallery-prev {
+	float: left;
+}
+.jmodal-gallery-next {
+	float: right;
 }
 .jmodal-gallery-links a:hover {
 	color: #fff;

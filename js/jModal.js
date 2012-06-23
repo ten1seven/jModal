@@ -11,9 +11,6 @@
 	win.jModal = function(breakpoints) {
 		
 		var init = function() {
-		
-			// do stuff here
-			console.log('jmodal init');
 			
 			$('.jmodal').click(function(e) {
 				e.preventDefault();
@@ -22,6 +19,16 @@
 				
 				($this.data('type') === 'image') ? loadImage($this,loadModal) : loadVideo($this,loadModal);
 			});
+			
+			// fix indexOf in ie
+			if (!Array.prototype.indexOf) {
+				Array.prototype.indexOf = function(obj, start) {
+					for (var i = (start || 0), j = this.length; i < j; i++) {
+						if (this[i] === obj) { return i; }
+					}
+					return -1;
+				}
+			}
 		
 		};
 		
@@ -42,7 +49,26 @@
 		/* video
 		========================================================================== */
 		var loadVideo = function(elm,callback) {
+			var $this = elm;
+			var video = '<iframe width="640" height="390" src="http://www.youtube.com/embed/' + videoID($this.attr('href')) + '" frameborder="0" allowfullscreen></iframe>';
 			
+			callback(video,$this);
+		};
+		var videoID = function(url) {
+			var queryString = url.split('?');
+			var params = queryString[1].split('&');
+			var v = '';
+			
+			for (var i = 0; i < params.length; i++) {
+				if (params.indexOf('v=')) {
+					var videoParam = params[i].split('=');
+					v = videoParam[1];
+					
+					break;
+				}
+			}
+			
+			return v;
 		};
 		
 		
