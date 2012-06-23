@@ -128,11 +128,11 @@
 				$('[rel=' + $(elm).attr('rel') + ']').each(function() {
 					
 					var selectedLink = ($(this).attr('href') === $(elm).attr('href')) ? 'selected' : '';
-					galleryContent += '<li><a href="' + $(this).attr('href') + '" class="jmodal-gallery-link ' + selectedLink + '">' + i + '</a></li>';
+					galleryContent += '<a href="' + $(this).attr('href') + '" class="jmodal-gallery-link ' + selectedLink + '">' + i + '</a>';
 					
 					i++;
 				});
-				$('#jmodal-modal').addClass('jmodal-modal-gallery').append('<ol class="jmodal-gallery-links">' + galleryContent + '</ol>');
+				$('#jmodal-modal').addClass('jmodal-modal-gallery').append('<p class="jmodal-gallery-links"><a href="#" class="jmodal-gallery-prev">Prev</a>' + galleryContent + '<a href="#" class="jmodal-gallery-next">Next</a></p>');
 				
 				bindGalleryLinks();
 			}
@@ -147,6 +147,34 @@
 						'opacity': 0
 					},100);
 					loadImage($this,dispGalleryImg);
+				}
+			});
+			
+			$('.jmodal-gallery-prev').click(function(e) {
+				e.preventDefault();
+				
+				var $selected = $('.jmodal-gallery-links .selected');
+				var $prev = $selected.prev().not(this);
+				
+				if ($prev.length !== 0) {
+					$('.jmodal-content img').animate({
+						'opacity': 0
+					},100);
+					loadImage($prev,dispGalleryImg);
+				}
+			});
+			
+			$('.jmodal-gallery-next').click(function(e) {
+				e.preventDefault();
+				
+				var $selected = $('.jmodal-gallery-links .selected');
+				var $next = $selected.next().not(this);
+				
+				if ($next.length !== 0) {
+					$('.jmodal-content img').animate({
+						'opacity': 0
+					},100);
+					loadImage($next,dispGalleryImg);
 				}
 			});
 		};
@@ -207,6 +235,32 @@
 				$(this).remove();
 			});
 		};
+		
+		
+		/*
+		var showBusyLoader = function(elm) {
+			$('<div id="carousel-busyloader"></div>').appendTo(elm).css({
+				'opacity': 0,
+				'margin-top': -50
+			}).animate({
+				'opacity': 1,
+				'margin-top': -30
+			},300);
+		};
+		
+		var hideBusyLoader = function(callback) {
+			var $busyloader = $('#carousel-busyloader');
+		
+			$busyloader.animate({
+				'opacity': 0,
+				'margin-top': -50
+			},300,function() {
+				$busyloader.remove();
+		
+				callback();
+			});
+		};
+		*/
 		
 		init();
 		

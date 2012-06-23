@@ -32,20 +32,17 @@ body {
 	overflow: hidden;
 	width: 100%;
 }
+
+/* gallery links */
 .jmodal-gallery-links {
 	bottom: 20px;
 	height: 34px;
 	left: 0;
 	line-height: 34px;
-	list-style: none;
 	margin: 0;
-	padding: 0;
 	position: absolute;
 	right: 0;
 	text-align: center;
-}
-.jmodal-gallery-links li {
-	display: inline-block;
 }
 .jmodal-gallery-links a {
 	color: #999;
