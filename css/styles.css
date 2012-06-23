@@ -2,13 +2,16 @@ body {
 	font-family: Arial, sans-serif;
 }
 
+
+/* @group jModal
+   ========================================================================== */
 #jmodal-modal {
 	background: #1b1b1b url('../img/bkg-noise-50.png') 50% 0;
 	box-shadow: 0 0 10px rgba(0,0,0,0.9);
 	left: 50%;
 	line-height: 0;
 	padding: 16px;
-	position: absolute;
+	position: fixed;
 	top: -9999px;
 	z-index: 1000;
 }
@@ -67,6 +70,8 @@ body {
 	font-weight: 700;
 	text-decoration: none;
 }
+/* @end */
+
 
 /* @group carousel busy loader
 	========================================================================== */

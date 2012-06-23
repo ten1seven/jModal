@@ -3,6 +3,19 @@
 	version 0.2
 	(c) 2012 Jeremy Fields [jeremy.fields@viget.com]
 	released under the MIT license
+
+	# usage
+
+	single image:
+	<a href="http://placekitten.com/800/800" class="jmodal" data-type="image">Single Image</a></p>
+
+	image gallery:
+	<a href="http://placekitten.com/800/600" class="jmodal" data-type="image" rel="set1">Image 1</a>
+	<a href="http://placekitten.com/600/800" class="jmodal" data-type="image" rel="set1">Image 2</a>
+	<a href="http://placekitten.com/500/500" class="jmodal" data-type="image" rel="set1">Image 3</a>
+
+	youtube video: 
+	<a href="http://www.youtube.com/watch?v=TnWDiXHYFUg&list=UUV5MN13xFPXwJX3lzbCc6gQ&index=2&feature=plpp_video" class="jmodal" data-type="video">Video</a>
 */
 (function(win,doc,undefine) {
 	
@@ -133,15 +146,8 @@
 				e.preventDefault();
 				
 				$jmodal
-					// update css for animating out
-					.css({
-						'margin-top': 0,
-						'top': $jmodal.offset().top
-					})
-					
-					// animate
 					.animate({
-						'top': ((height * -1) - 20)
+						'margin-top': '-125%'
 					},300,function() {
 						$jmodal.remove();
 						unBlockUI();
