@@ -33,7 +33,7 @@
 
 		var init = function() {
 
-			$('.jmodal').click(function(e) {
+			$('.jmodal').bind('click.jmodal',function(e) {
 				e.preventDefault();
 
 				var $this = $(this);
@@ -123,7 +123,7 @@
 					'margin-left': ((width/2) * -1),
 					'margin-top': 0,
 					'top': ((height * -1) - 10),
-					
+
 					'width': imgWidth
 				})
 				.delay(400)
@@ -131,7 +131,7 @@
 					'top': ((browser - height)/2)
 				},300,function() {
 					closeModal($jmodal);
-					
+
 					$jmodal
 						.css({
 							'top': '50%',
