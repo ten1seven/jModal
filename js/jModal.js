@@ -17,7 +17,7 @@
 	youtube video: 
 	<a href="http://www.youtube.com/watch?v=TnWDiXHYFUg&list=UUV5MN13xFPXwJX3lzbCc6gQ&index=2&feature=plpp_video" class="jmodal" data-type="video">Video</a>
 */
-(function(win,doc,undefine) {
+(function(win,doc,undefined) {
 
 	'use strict';
 
