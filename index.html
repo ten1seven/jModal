@@ -1,47 +1,59 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
 
-	<!-- META -->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!-- META -->
+		<meta charset="utf-8">
 
-	<!-- Force latest IE rendering engine (even in intranet) & Chrome Frame -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- tell mobile browsers to scale -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<!-- tell mobile browsers to scale -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>jModal</title>
 
-	<title>Time Life: Image/Video Modal</title>
+		<!-- CSS: implied media="all" -->
+		<link rel="stylesheet" href="//dl.dropbox.com/u/6951443/hosted-assets/css/normalize.css">
+		<link rel="stylesheet" href="css/styles.css">
 
-	<!-- CSS: implied media="all" -->
-	<link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+		<script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
 
-	<p><a href="http://placekitten.com/800/800" class="jmodal" data-type="image">Single Image</a></p>
-	
-	<hr>
-	
-	<p>
-		<a href="http://placekitten.com/800/600" class="jmodal" data-type="image" rel="set1">Image 1</a>
-		<a href="http://placekitten.com/600/800" class="jmodal" data-type="image" rel="set1">Image 2</a>
-		<a href="http://placekitten.com/500/500" class="jmodal" data-type="image" rel="set1">Image 3</a>
-	</p>
-	
-	<hr>
-	
-	<p><a href="http://www.youtube.com/watch?v=TnWDiXHYFUg&list=UUV5MN13xFPXwJX3lzbCc6gQ&index=2&feature=plpp_video" class="jmodal" data-type="video">Video</a></p>
+	</head>
+	<body>
 
-	<!-- Javascript -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write("<script src='http://dl.dropbox.com/u/6951443/hosted-assets/js/jquery.min.js'>\x3C/script>")</script>
-	<script src="js/jModal.js"></script>
-	<script>
-		$(function() { jModal() });
-	</script>
+		<p><a href="http://placekitten.com/600/600" class="jmodal" data-type="image">Single Image</a></p>
 
-</body>
+		<hr>
+
+		<p>
+			<a href="http://placekitten.com/800/600" class="jmodal" data-type="image" rel="set1">Image 1</a>
+			<a href="http://placekitten.com/600/700" class="jmodal" data-type="image" rel="set1">Image 2</a>
+			<a href="http://placekitten.com/500/500" class="jmodal" data-type="image" rel="set1">Image 3</a>
+		</p>
+
+		<hr>
+
+		<p><a href="http://www.youtube.com/watch?v=TnWDiXHYFUg&list=UUV5MN13xFPXwJX3lzbCc6gQ&index=2&feature=plpp_video" class="jmodal" data-type="video">Video</a></p>
+
+		<hr>
+
+		<p><a href="#more1" class="jmodal">Text</a></p>
+
+		<div id="more1" class="jmodal-target">
+			<h2>Lorem ipsum dolor sit amet</h2>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+
+		<!-- Javascript -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write("<script src='//dl.dropbox.com/u/6951443/hosted-assets/js/jquery.min.js'>\x3C/script>")</script>
+		<script src="js/util.js"></script>
+		<script src="js/jModal.js"></script>
+		<script>
+			$(function() { jModal() });
+		</script>
+
+	</body>
 </html>

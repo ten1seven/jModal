@@ -1,21 +1,33 @@
 body {
-	font-family: Arial, sans-serif;
+	background: #fff;
+	margin: 100px;
 }
 
-
-/* @group jModal
-   ========================================================================== */
-#jmodal-modal {
+#jmodal {
 	background: #1b1b1b url('../img/bkg-noise-50.png') 50% 0;
 	box-shadow: 0 0 10px rgba(0,0,0,0.9);
 	left: 50%;
 	line-height: 0;
-	padding: 16px;
+	opacity: 0;
+	padding: 20px;
 	position: fixed;
+	top: -50%;
+	-webkit-transform: translate3d(0,0,0);
+		-moz-transform: translate3d(0,0,0);
+		  -o-transform: translate3d(0,0,0);
+			  transform: translate3d(0,0,0);
+	-webkit-transition: opacity 300ms ease-out, top 300ms ease-out;
+		-moz-transition: opacity 300ms ease-out, top 300ms ease-out;
+		  -o-transition: opacity 300ms ease-out, top 300ms ease-out;
+			  transition: opacity 300ms ease-out, top 300ms ease-out;
 	z-index: 1000;
 }
-#jmodal-modal.jmodal-modal-gallery {
+#jmodal.jmodal-modal-gallery {
 	padding-bottom: 70px;
+}
+#jmodal.show {
+	opacity: 1;
+	top: 50%;
 }
 .jmodal-close {
 	background: url('../img/jmodal-close.png');
@@ -28,11 +40,20 @@ body {
 	width: 39px;
 }
 .jmodal-content {
-	background: #000 url('../img/ajax-loader-40Black.gif') no-repeat 50% 50%;
+	background-color: #000;
 	box-shadow: 0 0 3px rgba(0,0,0,0.4);
-	height: 100%;
 	overflow: hidden;
-	width: 100%;
+}
+.jmodal-content.loading {
+	background-image: url('../img/ajax-loader-40Black.gif');
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+.jmodal-content.text {
+	background-color: #fff;
+	line-height: 1.4;
+	padding: 30px;
+	width: 570px;
 }
 
 /* gallery links */
@@ -69,21 +90,18 @@ body {
 	font-weight: 700;
 	text-decoration: none;
 }
-/* @end */
 
-
-/* @group carousel busy loader
-	========================================================================== */
-#modal-busyloader {
-	background: #000 url('../img/ajax-loader-40Black.gif') no-repeat 50% 50%;
-	background-color: rgba(0,0,0,0.8);
-	border-radius: 5px;
-	height: 60px;
-	left: 50%;
-	margin: -30px 0 0 -30px;
-	position: absolute;
-	top: 50%;
-	width: 60px;
-	z-index: 999;
+.js .jmodal-target {
+	display: none;
 }
-/* @end */
+
+/* ui block */
+#UIBlock {
+	background: #000;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 900;
+}
