@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		
+		<!-- META -->
+		<meta charset="utf-8">
+		
+		<!-- tell mobile browsers to scale -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		
+		<title>jModal</title>
+		
+		<!-- CSS: implied media="all" -->
+		<link rel="stylesheet" href="//dl.dropbox.com/u/6951443/hosted-assets/css/normalize.css">
+		<style>
+			#jmodal {
+				background: #222;
+				left: 50%;
+				line-height: 0;
+				opacity: 0;
+				padding: 20px;
+				position: fixed;
+				top: -50%;
+				-webkit-transform: translate3d(0,0,0);
+				   -moz-transform: translate3d(0,0,0);
+				     -o-transform: translate3d(0,0,0);
+				        transform: translate3d(0,0,0);
+				-webkit-transition: opacity 300ms ease-out, top 300ms ease-out;
+				   -moz-transition: opacity 300ms ease-out, top 300ms ease-out;
+				     -o-transition: opacity 300ms ease-out, top 300ms ease-out;
+				        transition: opacity 300ms ease-out, top 300ms ease-out;
+				z-index: 1000;
+			}
+			#jmodal.show {
+				opacity: 1;
+				top: 50%;
+			}
+			.jmodal-close {
+				background-color: red;
+				border-radius: 100%;
+				display: block;
+				height: 30px;
+				position: absolute;
+				right: -13px;
+				text-indent: -9999px;
+				top: -13px;
+				width: 30px;
+			}
+			
+			#UIBlock {
+				background: #000;
+				height: 100%;
+				left: 0;
+				position: fixed;
+				top: 0;
+				width: 100%;
+				z-index: 900;
+			}
+		</style>
+		
+		<!-- All JavaScript at the bottom, except for Modernizr -->
+		<script src="//dl.dropbox.com/u/6951443/hosted-assets/js/modernizr.js"></script>
+	</head>
+	<body>
+		
+		<a href="http://placekitten.com/600/400" class="jmodal">link 1</a>
+		<a href="http://placekitten.com/700/400" class="jmodal">link 2</a>
+		
+		<div style="height: 700px;"></div>
+	
+		<!-- Javascript -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write("<script src='//dl.dropbox.com/u/6951443/hosted-assets/js/jquery.min.js'>\x3C/script>")</script>
+		<script>
+			var $jmodal, $jUI;
+			
+			$(function() {
+				
+				$('.jmodal').on('click',function(e) {
+					e.preventDefault();
+					
+					if (!$jmodal) {
+						addModal();
+					}
+					
+					preloadImage($(this).attr('href'));
+				});
+				
+			});
+			
+			var addModal = function() {
+				$jmodal = $('<div id="jmodal"><div class="jmodal-content"></div><a href="#" class="jmodal-close">Close</a></div>').appendTo('body');
+				
+				$('.jmodal-close').on('click',function(e) {
+					e.preventDefault();
+					
+					closeModal();
+				});
+			};
+			
+			var preloadImage = function(src) {
+				var img = document.createElement('img');
+				img.onload = function() {
+					$jmodal.find('.jmodal-content').html(img);
+					
+					showModal();
+				};
+				img.src = src;
+			};
+			
+			var showModal = function() {
+				var w = $jmodal.outerWidth();
+				var h = $jmodal.outerHeight();
+				
+				$jmodal.css({
+					'margin-top': marginOffset(h),
+					'margin-left': marginOffset(w)
+				}).addClass('show');
+				
+				blockUI();
+			};
+			
+			var closeModal = function() {
+				$jmodal.removeClass('show');
+				unBlockUI();
+			};
+			
+			var marginOffset = function(m) {
+				return (m/2) * -1;
+			};
+			
+			// Functions to block and unblock the UI
+			var blockUI = function() {
+				if (!$jUI) {
+					$jUI = $('<div id="UIBlock" />')
+						.css({
+							'opacity': 0.5
+						})
+						.appendTo('body')
+						.on('click',function() {
+							closeModal();
+						});
+				}
+			};
+			
+			var unBlockUI = function() {
+				$jUI.fadeOut(100,function() {
+					$(this).remove();
+					$jUI = '';
+				});
+			};
+		</script>
+	
+	</body>
+</html>
