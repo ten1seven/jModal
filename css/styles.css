@@ -93,7 +93,9 @@ body {
 }
 
 .js .jmodal-target {
-	display: none;
+	left: -9999em;
+	position: absolute;
+	top: -9999em;
 }
 
 /* ui block */
