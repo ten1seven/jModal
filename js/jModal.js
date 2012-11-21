@@ -92,7 +92,7 @@
 		var loadText = function(src) {
 			var text = $(src).html();
 			
-			$jmodal.find('.jmodal-content').addClass('text').html(text);
+			$jmodal.find('.jmodal-content').addClass('jmodal-text').html(text);
 			showModal();
 		};
 		

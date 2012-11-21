@@ -49,9 +49,10 @@ body {
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 }
-.jmodal-content.text {
+.jmodal-content.jmodal-text {
 	background-color: #fff;
 	line-height: 1.4;
+	margin: -20px;
 	padding: 30px;
 	width: 570px;
 }
