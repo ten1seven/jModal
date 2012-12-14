@@ -40,10 +40,6 @@
 			$('.jmodal').on('click',function(e) {
 				e.preventDefault();
 				
-				if (!$jmodal) {
-					addModal();
-				}
-				
 				handleClick($(this));
 			});
 			
@@ -62,7 +58,7 @@
 		/* youtube video
 		========================================================================== */
 		var loadVideo = function(src) {
-			var video = '<iframe width="640" height="390" src="http://www.youtube.com/embed/' + videoID(src) + '" frameborder="0" allowfullscreen></iframe>';
+			var video = '<object width="640" height="390"><param name="movie" value="http://www.youtube.com/v/' + videoID(src) + '?version=3&amp;hl=en_US&amp;rel=0&amp;autoplay=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/' + videoID(src) + '?version=3&amp;hl=en_US&amp;rel=0&amp;autoplay=1" type="application/x-shockwave-flash" width="640" height="390" allowscriptaccess="always" allowfullscreen="true"></embed></object>';
 			
 			$jmodal.find('.jmodal-content').html(video);
 			
@@ -186,6 +182,9 @@
 		/* show/hide modal
 		========================================================================== */
 		var handleClick = function(elm) {
+			
+			addModal();
+			
 			if (elm.data('type') === 'image') {
 				
 				if (elm.attr('rel')) {
@@ -229,6 +228,7 @@
 			window.setTimeout(function() {
 				$jmodal.removeClass('jmodal-modal-gallery').find('.jmodal-content').removeClass('text');
 				$jmodal.find('.jmodal-gallery-links').remove();
+				$jmodal.remove();
 			},500);
 		};
 		
